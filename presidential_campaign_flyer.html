@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>August Domanchuk 2032 - Presidential Campaign</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        .flyer {
+            width: 700px;
+            min-height: 1800px;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a0a1a 15%, #2d1b3d 35%, #4a2c5a 65%, #1a0a1a 85%, #0a0a0a 100%);
+            position: relative;
+            border-radius: 20px;
+            box-shadow: 
+                0 0 80px rgba(138, 43, 226, 0.4),
+                0 0 40px rgba(75, 0, 130, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+        
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-item {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 20px;
+            background: rgba(0, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-item:hover {
+            background: rgba(0, 255, 255, 0.2);
+            color: #00ffff;
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .purple-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(75, 0, 130, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(147, 0, 211, 0.1) 0%, transparent 50%);
+            animation: purpleShimmer 8s ease-in-out infinite;
+        }
+        
+        .futuristic-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridPulse 6s ease-in-out infinite;
+            opacity: 0.4;
+        }
+        
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.6; }
+        }
+        
+        .floating-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00ffff;
+            border-radius: 50%;
+            animation: floatUp 15s linear infinite;
+            opacity: 0;
+        }
+        
+        .particle::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            border-radius: inherit;
+            animation: particleGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes particleGlow {
+            from { box-shadow: 0 0 5px rgba(0, 255, 255, 0.5); }
+            to { box-shadow: 0 0 15px rgba(0, 255, 255, 1); }
+        }
+        
+        .healing-network {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .network-node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00ffff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            animation: nodeHealing 6s ease-in-out infinite;
+        }
+        
+        .network-connection {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+            animation: connectionPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes nodeHealing {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            }
+            50% { 
+                transform: scale(1.5);
+                box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+            }
+        }
+        
+        @keyframes connectionPulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes purpleShimmer {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 30px 30px 30px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .year {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
+            color: #00ffff;
+            text-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.5),
+                0 0 40px rgba(0, 255, 255, 0.3),
+                0 4px 8px rgba(0, 0, 0, 0.8);
+            margin-bottom: 20px;
+            letter-spacing: 12px;
+            animation: neonGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes neonGlow {
+            from { 
+                text-shadow: 
+                    0 0 20px rgba(0, 255, 255, 0.5),
+                    0 0 40px rgba(0, 255, 255, 0.3),
+                    0 4px 8px rgba(0, 0, 0, 0.8);
+            }
+            to { 
+                text-shadow: 
+                    0 0 30px rgba(0, 255, 255, 0.8),
+                    0 0 60px rgba(0, 255, 255, 0.5),
+                    0 4px 8px rgba(0, 0, 0, 0.8);
+            }
+        }
+        
+        .party-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 25px 0;
+            gap: 20px;
+        }
+        
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.4));
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+        
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-8px) scale(1.05); }
+        }
+        
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+        }
+        
+        .main-content {
+            text-align: center;
+            padding: 0 40px 40px 40px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .candidate-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 
+                0 0 10px rgba(138, 43, 226, 0.6),
+                0 4px 8px rgba(0, 0, 0, 0.8);
+            margin-bottom: 25px;
+            letter-spacing: 4px;
+            position: relative;
+        }
+        
+        .candidate-name::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, #00ffff, #8a2be2, #00ffff);
+            border-radius: 2px;
+        }
+        
+        .slogans {
+            margin: 40px 0;
+        }
+        
+        .slogan {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            margin: 18px 0;
+            padding: 15px 30px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .slogan:hover {
+            background: rgba(0, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .quotes-section {
+            margin: 50px 0;
+            padding: 30px;
+            background: rgba(138, 43, 226, 0.1);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+        }
+        
+        .quote {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            line-height: 1.7;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .website {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #0a0a0a;
+            background: linear-gradient(135deg, #00ffff, #40e0d0);
+            padding: 18px 35px;
+            border-radius: 35px;
+            display: inline-block;
+            letter-spacing: 1px;
+            box-shadow: 
+                0 8px 25px rgba(0, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: websitePulse 2.5s ease-in-out infinite;
+            margin: 30px 0;
+        }
+        
+        @keyframes websitePulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 12px 35px rgba(0, 255, 255, 0.5); }
+        }
+        
+        .party-description {
+            margin-top: 50px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(138, 43, 226, 0.4);
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            text-align: left;
+        }
+        
+        .party-description h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            margin-bottom: 25px;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+        
+        .party-description h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            margin: 35px 0 20px 0;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .party-description p {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: #ffffff;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        .principle {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #ffffff;
+            line-height: 1.7;
+            margin: 20px 0;
+            padding: 25px 30px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.15), rgba(75, 0, 130, 0.1));
+            border-radius: 15px;
+            border-left: 4px solid #00ffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .principle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .principle:hover::before {
+            left: 100%;
+        }
+        
+        .principle:hover {
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.2);
+            border-left-color: #8a2be2;
+        }
+        
+        .principle strong {
+            color: #00ffff;
+            font-weight: 700;
+            font-size: 17px;
+        }
+        
+        .tagline {
+            font-style: italic;
+            font-weight: 600;
+            text-align: center;
+            font-size: 20px;
+            color: #00ffff;
+            margin-top: 35px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(138, 43, 226, 0.1));
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        
+        .core-2032 {
+            margin-top: 40px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(75, 0, 130, 0.2), rgba(138, 43, 226, 0.15));
+            border: 1px solid rgba(138, 43, 226, 0.4);
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+        }
+        
+        .core-2032 p {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: #ffffff;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        .first-principles p {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: #ffffff;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        .clarity-consensus p {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: #ffffff;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+        
+        .emergent-highlight {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(138, 43, 226, 0.1));
+            border-left: 4px solid #8a2be2;
+            border-right: 2px solid #00ffff;
+        }
+        
+        .first-principles {
+            margin-top: 40px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(138, 43, 226, 0.05));
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+        }
+        
+        .first-principles h4 {
+            color: #ffffff;
+            font-size: 28px;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+            border-bottom: 2px solid rgba(0, 255, 255, 0.4);
+        }
+        
+        .clarity-consensus {
+            margin-top: 40px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.08), rgba(0, 255, 255, 0.05));
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .clarity-consensus h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+            margin: 35px 0 20px 0;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(138, 43, 226, 0.4);
+            padding-bottom: 10px;
+        }
+        
+        .clarity-consensus::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00ffff, #8a2be2, #00ffff, transparent);
+            animation: borderFlow 3s linear infinite;
+        }
+        
+        @keyframes borderFlow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .clarity-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 20px;
+        }
+        
+        .clarity-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.5));
+            animation: clarityPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes clarityPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+        
+        .clarity-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .party-description, .core-2032, .first-principles, .clarity-consensus {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .party-description::before, .core-2032::before, .first-principles::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ffff, #8a2be2, #00ffff, #8a2be2);
+            background-size: 400% 400%;
+            border-radius: 27px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: gradientShift 8s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="flyer">
+        <div class="purple-rain"></div>
+        <div class="futuristic-grid"></div>
+        
+        <div class="floating-particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 1s;"></div>
+        </div>
+        
+        <div class="healing-network">
+            <!-- Network nodes -->
+            <div class="network-node" style="top: 15%; left: 20%; animation-delay: 0s;"></div>
+            <div class="network-node" style="top: 25%; left: 70%; animation-delay: 1s;"></div>
+            <div class="network-node" style="top: 40%; left: 15%; animation-delay: 2s;"></div>
+            <div class="network-node" style="top: 55%; left: 80%; animation-delay: 3s;"></div>
+            <div class="network-node" style="top: 70%; left: 30%; animation-delay: 4s;"></div>
+            <div class="network-node" style="top: 85%; left: 65%; animation-delay: 5s;"></div>
+            
+            <!-- Network connections -->
+            <div class="network-connection" style="top: 20%; left: 20%; width: 50%; transform: rotate(15deg); animation-delay: 0.5s;"></div>
+            <div class="network-connection" style="top: 45%; left: 15%; width: 65%; transform: rotate(-10deg); animation-delay: 1.5s;"></div>
+            <div class="network-connection" style="top: 75%; left: 30%; width: 35%; transform: rotate(25deg); animation-delay: 2.5s;"></div>
+        </div>
+        
+        <div class="nav-bar">
+            <a href="#about" class="nav-item">About Party</a>
+            <a href="#core2032" class="nav-item">The Prospectus</a>
+            <a href="#principles" class="nav-item">First Principles</a>
+            <a href="#clarity" class="nav-item">Clarity Consensus</a>
+        </div>
+        
+        <div class="header">
+            <div class="year">2032</div>
+            <div class="party-logo">
+                <div class="logo-icon">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00ffff;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#40e0d0;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00cccc;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Top-left quarter circle -->
+                        <path d="M 10 10 A 30 30 0 0 1 40 10 L 40 40 A 30 30 0 0 1 10 40 Z" fill="url(#logoGradient)" />
+                        <!-- Bottom-right quarter circle -->
+                        <path d="M 40 40 A 30 30 0 0 1 70 40 L 70 70 A 30 30 0 0 1 40 70 Z" fill="url(#logoGradient)" />
+                        <!-- Center rounded square (negative space) -->
+                        <rect x="25" y="25" width="30" height="30" rx="8" ry="8" fill="#0a0a0a" opacity="0.95"/>
+                    </svg>
+                </div>
+                <div class="logo-text">THE SAME PAGE PARTY</div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="candidate-name">AUGUST DOMANCHUK</div>
+            
+            <div class="slogans">
+                <div class="slogan">A Voice Of The People</div>
+                <div class="slogan">A Voice Of Reason</div>
+            </div>
+            
+            <div class="quotes-section">
+                <div class="quote">"The most effective way to lead a country is Together."</div>
+                <div class="quote">"It's time to solve our problems with a new mindset and perspective. And this perspective must be built together."</div>
+            </div>
+            
+            <div class="website">Waves.Fund/wave/August2032</div>
+            
+            <div class="party-description" id="about">
+                <h3>About The Same Page Party</h3>
+                <p>The Same Page Party represents a transformative evolution in American politics—where artificial divisions dissolve into collaborative solutions, where technology serves humanity, and where every citizen is empowered to participate in our democratic renaissance.</p>
+                
+                <h4>Our Foundational Principles</h4>
+                
+                <div class="principle">
+                    <strong>Unity Through Diversity:</strong> America's greatest asset is our diversity of thought, background, and experience. We harness this diversity not as a source of division, but as our competitive advantage in solving complex 21st-century challenges.
+                </div>
+                
+                <div class="principle">
+                    <strong>Evidence-Based Governance:</strong> Policy decisions should be grounded in data, science, and measurable outcomes—not ideology or partisan politics. We champion transparency, accountability, and continuous improvement in government.
+                </div>
+                
+                <div class="principle">
+                    <strong>Technological Democracy:</strong> We embrace technology as a force multiplier for democratic participation, using digital tools to enhance transparency, increase civic engagement, and make government more accessible to every American.
+                </div>
+                
+                <div class="principle">
+                    <strong>Economic Innovation & Justice:</strong> We support an economy that rewards innovation while ensuring prosperity is shared. This includes universal basic assets, worker ownership programs, and policies that prepare Americans for the jobs of tomorrow.
+                </div>
+            </div>
+            
+            <div class="core-2032" id="core2032">
+                <h4>The Prospectus: 2032</h4>
+                
+                <div class="principle emergent-highlight">
+                    <strong>Emergent Citizenship:</strong> In an age of rapid technological and social change, citizenship itself must evolve. We propose Emergent Citizenship—a dynamic model where civic participation adapts to new realities, including digital natives, AI-augmented decision-making, and global interconnectedness. Every person contributes their unique capabilities to our collective intelligence.
+                </div>
+                
+                <div class="principle">
+                    <strong>Climate Resilience & Innovation:</strong> The climate crisis demands both immediate action and long-term innovation. We will lead a green industrial revolution, creating millions of jobs while building the sustainable infrastructure America needs for the next century.
+                </div>
+                
+                <div class="principle">
+                    <strong>AI Ethics & Human Dignity:</strong> As artificial intelligence reshapes society, we must ensure it serves human flourishing. We advocate for AI transparency, algorithmic accountability, and policies that augment rather than replace human potential.
+                </div>
+                
+                <div class="principle">
+                    <strong>Mental Health Revolution:</strong> By 2032, mental health will be as prioritized as physical health. We propose comprehensive mental wellness infrastructure, destigmatization efforts, and integration of mental health support into education, workplace, and community settings.
+                </div>
+                
+                <div class="principle">
+                    <strong>Democratic Renaissance:</strong> Our democracy needs upgrading for the digital age. We support ranked-choice voting, campaign finance reform, digital town halls, and innovative civic engagement platforms that make every voice heard and every vote meaningful.
+                </div>
+                
+                <div class="principle">
+                    <strong>Global Collaboration & Peace:</strong> America's leadership in the 2030s requires cooperative approaches to global challenges—from pandemics to space exploration. We believe in principled diplomacy, cultural exchange, and shared solutions to shared problems.
+                </div>
+                
+                <p>Our vision transcends traditional political boundaries. We're not asking Americans to choose between progress and tradition, between innovation and security, between individual freedom and collective responsibility. We're building a future where these false choices dissolve into integrated solutions.</p>
+                
+                <p class="tagline">"America, It's Time To Get On The Same Page."</p>
+            </div>
+            
+            <div class="first-principles" id="principles">
+                <h4>Leading With First Principles Thinking</h4>
+                
+                <p>The Same Page Party will govern America using First Principles—the fundamental truths that serve as the foundation for all decision-making. Rather than building policy on assumptions, tradition, or political convenience, we will deconstruct complex problems to their core elements and rebuild solutions from the ground up.</p>
+                
+                <div class="principle">
+                    <strong>Constitutional Foundation:</strong> Every policy begins with the Constitution as our bedrock principle. We ask: "Does this serve the fundamental purpose of government—to secure life, liberty, and the pursuit of happiness for all Americans?"
+                </div>
+                
+                <div class="principle">
+                    <strong>Evidence-Based Reasoning:</strong> We strip away political rhetoric and ask: "What does the data actually show? What are the measurable outcomes? What works, and what doesn't?" Policy flows from facts, not feelings.
+                </div>
+                
+                <div class="principle">
+                    <strong>Long-term Optimization:</strong> Instead of election-cycle thinking, we optimize for generational impact. We ask: "How will this decision affect Americans in 2050? What kind of country are we building for our children?"
+                </div>
+                
+                <div class="principle">
+                    <strong>Systems Thinking:</strong> Problems are interconnected. We approach challenges holistically, understanding that healthcare connects to education, that climate connects to economy, that technology connects to democracy.
+                </div>
+                
+                <div class="principle">
+                    <strong>Human Dignity as Core:</strong> Every policy must pass the fundamental test: "Does this enhance human dignity, expand human potential, and respect individual agency while serving collective good?"
+                </div>
+                
+                <p>This approach means we won't inherit broken systems—we'll rebuild them correctly. We won't accept "that's how we've always done it"—we'll ask "what's the best way to do it now?" First Principles thinking cuts through political gridlock because truth is not partisan.</p>
+            </div>
+            
+            <div class="clarity-consensus" id="clarity">
+                <h4>Partnership: Same Page DAO × Clarity Consensus</h4>
+                
+                <div class="clarity-logo">
+                    <div class="clarity-icon">
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+                            <defs>
+                                <linearGradient id="clarityGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#8a2be2;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#00ffff;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#8a2be2;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Simple elegant geometric design -->
+                            <circle cx="30" cy="30" r="25" fill="none" stroke="url(#clarityGradient)" stroke-width="2"/>
+                            <circle cx="30" cy="30" r="15" fill="none" stroke="#00ffff" stroke-width="1" opacity="0.8"/>
+                            <circle cx="30" cy="30" r="5" fill="#8a2be2"/>
+                            <!-- Four connection points -->
+                            <circle cx="30" cy="10" r="3" fill="#00ffff"/>
+                            <circle cx="50" cy="30" r="3" fill="#00ffff"/>
+                            <circle cx="30" cy="50" r="3" fill="#00ffff"/>
+                            <circle cx="10" cy="30" r="3" fill="#00ffff"/>
+                            <!-- Connection lines -->
+                            <line x1="30" y1="13" x2="30" y2="20" stroke="#00ffff" stroke-width="1" opacity="0.6"/>
+                            <line x1="47" y1="30" x2="40" y2="30" stroke="#00ffff" stroke-width="1" opacity="0.6"/>
+                            <line x1="30" y1="47" x2="30" y2="40" stroke="#00ffff" stroke-width="1" opacity="0.6"/>
+                            <line x1="13" y1="30" x2="20" y2="30" stroke="#00ffff" stroke-width="1" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <div class="clarity-text">CLARITY CONSENSUS</div>
+                </div>
+                
+                <div class="principle partnership-highlight">
+                    <strong>Revolutionary Democratic Technology:</strong> In partnership with Clarity Consensus, The Same Page Party will deploy cutting-edge consensus-building technology that transforms how Americans participate in democracy. Clarity Consensus uses advanced algorithms and human-centered design to find common ground among diverse viewpoints.
+                </div>
+                
+                <div class="principle">
+                    <strong>How Clarity Consensus Works:</strong> Citizens engage with policy questions through an intelligent platform that identifies shared values, maps areas of agreement, and surfaces innovative solutions that transcend traditional political divisions. It's democracy upgraded for the digital age.
+                </div>
+                
+                <div class="principle">
+                    <strong>Transparent Governance:</strong> Every policy decision will be informed by Clarity Consensus data, showing exactly where Americans agree, where they differ, and what creative solutions emerge from collective intelligence. No more politicians claiming to speak for "the people"—we'll actually know what the people think.
+                </div>
+                
+                <div class="principle">
+                    <strong>Inclusive Decision-Making:</strong> Clarity Consensus ensures every voice is heard, not just the loudest ones. The platform actively seeks out underrepresented perspectives and creates space for nuanced positions that don't fit traditional left-right categories.
+                </div>
+                
+                <p>Together, The Same Page Party and Clarity Consensus will prove that Americans have far more in common than our political system suggests. We'll turn the wisdom of crowds into the governance of consensus, making democracy more representative, more effective, and more responsive to the real needs of real people.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
